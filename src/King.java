@@ -66,7 +66,7 @@ public class King extends Piece implements Serializable {
                 }
             }
         }
-        System.out.println("Invalid King Move");
+        System.out.println("Invalid King move");
         return false;
     }
 }

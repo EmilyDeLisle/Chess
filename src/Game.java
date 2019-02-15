@@ -104,19 +104,19 @@ public class Game implements Serializable {
         // If it is the first click, get the first Square.
         if (clickCount == 1) {
             square1 = squares[coords[0]][coords[1]];
-            // If there is a Piece in the Square, displays what that piece is, click process
-            // continues to the second click.
+            // If there is a Piece in the Square, and the current Player is the owner of this Piece,
+            // click process continues to the second click.
             if (!square1.isEmpty() && square1.getPiece().getPlayer() == turn) {
                 clickCount++;
                 return false;
-            // If there is no Piece in the Square, click process does not progress, displays a
-            // message saying this Square is empty.
+            // If there is no Piece in the Square, click process does not progress
             } else {
                 return false;
             }
-        // If this is the second click (and the first click had a Piece in it), displays if the
-        // second Square is occupied or not. If it is, the Piece in the destination Square is
-        // removed, and it both cases the first piece moves to the new Square.
+        // If this is the second click, checks if the path to the destination Square is clear.
+        // If it is, move the Piece to the destination Square if the Square is empty.
+        // If the destination Square is not empty, the Piece there must be owned by the opposing
+        // Player in order to capture it. Otherwise, the move is not valid.
         } else {
             square2 = squares[coords[0]][coords[1]];
             clickCount = 1;

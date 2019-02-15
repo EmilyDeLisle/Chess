@@ -46,7 +46,7 @@ public class Rook extends Piece implements Serializable {
                 return true;
             }
         }
-        System.out.println("Invalid Rook Move");
+        System.out.println("Invalid Rook move");
         return false;
     }
 }

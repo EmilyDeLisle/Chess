@@ -46,7 +46,7 @@ public class Bishop extends Piece implements Serializable {
                 return true;
             }
         }
-        System.out.println("Invalid Bishop Move");
+        System.out.println("Invalid Bishop move");
         return false;
     }
 }

@@ -56,7 +56,7 @@ public class Knight extends Piece implements Serializable {
                 }
             }
         }
-        System.out.println("Invalid Knight Move");
+        System.out.println("Invalid Knight move");
         return false;
     }
 

@@ -62,7 +62,7 @@ public class Queen extends Piece implements Serializable {
             }
         }
 
-        System.out.println("Invalid Queen Move");
+        System.out.println("Invalid Queen move");
         return false;
     }
 }

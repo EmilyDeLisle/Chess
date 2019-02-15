@@ -131,11 +131,14 @@ public class Board extends Application implements Serializable {
             this.show();
         }
 
+        /**
+         * Sets up layout for the menu window.
+         * @param layout the root Group
+         */
         private void setupLayout(Group layout) {
             Text title = new Text(10, 50, "Chess.");
 
-            Text info = new Text(10, 80, "Hit M at any time to open the Menu.\n" +
-                    "Select from the following options:");
+            Text info = new Text(10, 100, "Select from the following options:");
 
             Text options = new Text(60, 140, "New game\n\n" +
                                     "Open game\n\n" +
@@ -164,6 +167,7 @@ public class Board extends Application implements Serializable {
          */
         private void processKeyEvent(KeyEvent event) {
 
+            // Arrow key selector controls
             switch (event.getCode()) {
                 case DOWN:
                     if (select < 4) {
