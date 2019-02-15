@@ -36,23 +36,10 @@ public class Queen extends Piece implements Serializable {
         int distanceX = Math.abs(x1 - x2);
         int distanceY = Math.abs(y1 - y2);
 
-        // Move can be in a straight line along one axis
+        // Move can be in a straight line along one axis or a diagonal line along both
         // If a Piece is in the destination Square, it must owned by the opposing Player for the
         // Queen to capture it
-        if (x1 == x2 || y1 == y2) {
-            if (square.isEmpty()) {
-                return true;
-            } else if (!square.isEmpty()
-                    && !square.getPiece().getPlayer().equals(super.getPlayer())) {
-                System.out.println("Queen captures " + square.getPiece().getName());
-                return true;
-            }
-        }
-
-        // Move can be in a diagonal line along one axis
-        // If a Piece is in the destination Square, it must owned by the opposing Player for the
-        // Queen to capture it
-        if (distanceX == distanceY) {
+        if ((x1 == x2 || y1 == y2) || (distanceX == distanceY)) {
             if (square.isEmpty()) {
                 return true;
             } else if (!square.isEmpty()

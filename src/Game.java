@@ -120,38 +120,18 @@ public class Game implements Serializable {
         } else {
             square2 = squares[coords[0]][coords[1]];
             clickCount = 1;
-            if (!square2.isEmpty()) {
-                // If the Piece is a Knight, don't check for a clear path
-                if (square1.getPiece() instanceof Knight) {
-                    if (square1.getPiece().isValidMove(square2)) {
-                        move(square1, square2);
-                        setTurn();
-                        return true;
-                    }
-                } else {
-                    // If the Piece is not a Knight, check for a clear path
-                    if (clearPath(square1, square2)) {
-                        if (square1.getPiece().isValidMove(square2)) {
-                            move(square1, square2);
-                            setTurn();
-                            return true;
-                        }
-                    }
+            // If the Piece is a Knight, don't check for a clear path
+            if (square1.getPiece() instanceof Knight) {
+                if (square1.getPiece().isValidMove(square2)) {
+                    move(square1, square2);
+                    return true;
                 }
             } else {
-                if (square1.getPiece() instanceof Knight) {
+                // If the Piece is not a Knight, check for a clear path
+                if (clearPath(square1, square2)) {
                     if (square1.getPiece().isValidMove(square2)) {
                         move(square1, square2);
-                        setTurn();
                         return true;
-                    }
-                } else {
-                    if (clearPath(square1, square2)) {
-                        if (square1.getPiece().isValidMove(square2)) {
-                            move(square1, square2);
-                            setTurn();
-                            return true;
-                        }
                     }
                 }
             }
@@ -191,6 +171,9 @@ public class Game implements Serializable {
 
         // Sets the Piece reference in the now empty Square to null
         square1.setPiece(null);
+
+        // Flips the current Player to the other Player
+        setTurn();
     }
 
     /**

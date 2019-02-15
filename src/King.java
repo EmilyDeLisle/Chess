@@ -39,24 +39,11 @@ public class King extends Piece implements Serializable {
         // Can only move one space in any direction
         final int moveCount = 1;
 
-        // Move can be in a straight line along one axis
+        // Move can be in a straight line or diagonal, but must be only one Square
         // If a Piece is in the destination Square, it must owned by the opposing Player for the
         // King to capture it
         if (distanceX == moveCount || distanceY == moveCount) {
-            if (x1 == x2 || y1 == y2) {
-                if (square.isEmpty()) {
-                    return true;
-                } else if (!square.isEmpty()
-                        && !square.getPiece().getPlayer().equals(super.getPlayer())) {
-                    System.out.println("King captures " + square.getPiece().getName());
-                    return true;
-                }
-            }
-
-            // Move can be in a diagonal line along one axis
-            // If a Piece is in the destination Square, it must owned by the opposing Player for the
-            // King to capture it
-            if (distanceX == distanceY) {
+            if ((x1 == x2 || y1 == y2) || (distanceX == distanceY)) {
                 if (square.isEmpty()) {
                     return true;
                 } else if (!square.isEmpty()

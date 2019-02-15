@@ -36,17 +36,8 @@ public class Knight extends Piece implements Serializable {
 
         // Distance must be 2 or less Squares away on either axis
         if (distanceX <= 2 && distanceY <= 2) {
-            // If two Squares away on the X axis, must be 1 Square away on the Y axis
-            if (distanceY == 2 && distanceX == 1) {
-                if (square.isEmpty()) {
-                    return true;
-                } else if (!square.isEmpty()
-                        && !square.getPiece().getPlayer().equals(super.getPlayer())) {
-                    System.out.println("Knight captures " + square.getPiece().getName());
-                    return true;
-                }
-            // If two Squares away on the Y axis, must be 1 Square away on the X axis
-            } else if (distanceX == 2 && distanceY == 1) {
+            // If two Squares away on one axis, must be 1 Square away on the other axis
+            if ((distanceY == 2 && distanceX == 1) || (distanceX == 2 && distanceY == 1)) {
                 if (square.isEmpty()) {
                     return true;
                 } else if (!square.isEmpty()

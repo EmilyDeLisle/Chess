@@ -40,7 +40,7 @@ public class Board extends Application implements Serializable {
          * @param x X coordinate of Square
          * @param y Y coordinate of Square
          */
-        public ClickListener(Rectangle rect, int x, int y) {
+        private ClickListener(Rectangle rect, int x, int y) {
             this.rect = rect;
             coords = new int[2];
             coords[0] = x;
@@ -73,7 +73,7 @@ public class Board extends Application implements Serializable {
                     root.getChildren().remove(icons[coords[0]][coords[1]]);
                 }
 
-                // Create a icon of the same object in new location
+                // Create an icon of the same Piece in new location
                 Image img = new Image(currentPiece.getIcon(),
                         86, 86, true, true);
                 ImageView icon = new ImageView(img);
@@ -109,10 +109,10 @@ public class Board extends Application implements Serializable {
         private int select = 1;
 
         /** Icon for menu selection */
-        Image pawn;
+        private Image pawn;
 
         /** Menu selector */
-        ImageView pointer;
+        private ImageView pointer;
 
         /** Menu constructor & initial setup */
         private Menu () {
@@ -166,18 +166,18 @@ public class Board extends Application implements Serializable {
          * @param event Key event
          */
         private void processKeyEvent(KeyEvent event) {
-
+            final int yTranslate = 33;
             // Arrow key selector controls
             switch (event.getCode()) {
                 case DOWN:
                     if (select < 4) {
-                        pointer.setY(pointer.getY() + 33);
+                        pointer.setY(pointer.getY() + yTranslate);
                         select++;
                     }
                 break;
                 case UP:
                     if (select > 1) {
-                        pointer.setY(pointer.getY() - 33);
+                        pointer.setY(pointer.getY() - yTranslate);
                         select--;
                     }
                     break;
@@ -209,7 +209,7 @@ public class Board extends Application implements Serializable {
             }
         }
 
-        /** Opens game from a file chosen by the user. */
+        /** Opens saved Game from a file chosen by the user. */
         private void openGame() {
             try {
                 System.out.println("Opening game...");
@@ -217,7 +217,9 @@ public class Board extends Application implements Serializable {
                 fileChooser.setTitle("Open Game");
                 File openFile = fileChooser.showOpenDialog(this);
 
-                if(openFile == null){
+                // If the open dialog is closed before a file is selected, close the menu and
+                // abort the open process
+                if (openFile == null) {
                     System.out.println("File open cancelled");
                     this.close();
                     return;
@@ -233,7 +235,7 @@ public class Board extends Application implements Serializable {
                 oi.close();
                 fi.close();
 
-                // Reload board
+                // Reload Board
                 populateBoard(root);
 
                 // Close menu
@@ -248,7 +250,7 @@ public class Board extends Application implements Serializable {
 
         }
 
-        /** Opens current game from to a file chosen by the user. */
+        /** Opens current Game from to a file chosen by the user. */
         private void saveGame() {
             try {
                 System.out.println("Saving game...");
@@ -294,6 +296,7 @@ public class Board extends Application implements Serializable {
     /** Holds all icons */
     private ImageView[][] icons = new ImageView[8][8];
 
+    /** Current Player display */
     private Text currentPlayer;
 
     /** Group for objects in the Scene */
@@ -354,16 +357,16 @@ public class Board extends Application implements Serializable {
 
         Rectangle infobar = new Rectangle(0,640,640,20);
         infobar.setFill(Color.GREY);
+
         currentPlayer = new Text(5, 655, "Current player: " + game.turn.getName());
         currentPlayer.setFont(Font.font ("Veranda", 14));
         currentPlayer.setFill(Color.WHITE);
+
         Text menuInfo = new Text(461, 655, "Press M to open the menu");
         menuInfo.setFont(Font.font ("Veranda", 14));
         menuInfo.setFill(Color.WHITE);
 
-
         root.getChildren().addAll(infobar, currentPlayer, menuInfo);
-
     }
 
     /**
@@ -390,13 +393,5 @@ public class Board extends Application implements Serializable {
         primaryStage.setTitle("Chess");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    /**
-     * Launches the Application
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        Board.launch(args);
     }
 }
